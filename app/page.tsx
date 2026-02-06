@@ -1,65 +1,100 @@
-import Image from "next/image";
+import ScrollRevealHero from "@/components/ScrollRevealHero";
+import ScrollReveal from "@/components/ScrollReveal";
+import SectionLabel from "@/components/SectionLabel";
+import ServiceCard from "@/components/ServiceCard";
+import FeaturedProject from "@/components/FeaturedProject";
+import PhilosophyStrip from "@/components/PhilosophyStrip";
+import { images } from "@/lib/images";
+
+const services = [
+  {
+    title: "Commercial Spaces",
+    description:
+      "Modern offices with minimal botanical design. Orchids, curated greenery, and biophilic elements that elevate productivity and well-being.",
+    image: images.serviceCommercial,
+  },
+  {
+    title: "Private Residences",
+    description:
+      "Bespoke floral design tailored to your interior aesthetic. Bringing warmth, energy, and living beauty into personal spaces.",
+    image: images.serviceResidential,
+  },
+  {
+    title: "Luxury Retail",
+    description:
+      "Refined botanical installations for high-end retail environments. Creating atmosphere that draws people in and makes them stay.",
+    image: images.serviceRetail,
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      {/* Section 1: Hero — image background with text overlay */}
+      <ScrollRevealHero
+        imageSrc={images.hero}
+        title="Big Feels"
+        label="Luxury Botanical Design"
+      />
+
+      {/* Section 2: Intro / Mission Statement — z-10 to scroll over sticky hero */}
+      <section className="relative z-10 bg-black py-32 md:py-48">
+        <div className="max-w-[900px] mx-auto px-6 md:px-12 text-center">
+          <ScrollReveal>
+            <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-8 tracking-tighter">
+              Beauty that optimizes space.
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal delay={0.2}>
+            <p className="font-sans text-lg md:text-xl text-white/60 leading-relaxed max-w-2xl mx-auto">
+              A true sense of space is intentional. Big Feels begins where
+              architecture meets nature — where botanical design transforms how
+              people feel, work, and live.
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Section 3: Services Grid */}
+      <section className="relative z-10 bg-black py-32 md:py-48">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+          <ScrollReveal>
+            <SectionLabel text="What We Do" />
+          </ScrollReveal>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mt-12">
+            {services.map((service, i) => (
+              <ServiceCard key={service.title} {...service} index={i} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Section 4: Featured Project 1 — Full viewport */}
+      <div className="relative z-10">
+        <FeaturedProject
+          title="The Haze Studio"
+          tagline="Golden hour meets botanical precision. A 12,000 sq ft creative workspace reimagined."
+          image={images.projectHazeStudio}
+          slug="the-haze-studio"
+          align="left"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div>
+
+      {/* Section 5: Philosophy Strip */}
+      <div className="relative z-10">
+        <PhilosophyStrip quote="We believe every space has a frequency. Our work is tuning it — through light, form, and living design — to where people operate at their highest potential." />
+      </div>
+
+      {/* Section 6: Featured Project 2 — Full viewport */}
+      <div className="relative z-10">
+        <FeaturedProject
+          title="Villa Serena"
+          tagline="A private residence where every botanical element was chosen to complement the architecture and the life within it."
+          image={images.projectVillaSerena}
+          slug="villa-serena"
+          align="right"
+        />
+      </div>
+    </>
   );
 }
