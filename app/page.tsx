@@ -33,7 +33,7 @@ export default function Home() {
       {/* Section 1: Hero — image background with text overlay */}
       <ScrollRevealHero
         imageSrc={images.hero}
-        title="Big Feels"
+        title="big FEELS"
         label="Luxury Botanical Design"
       />
 
